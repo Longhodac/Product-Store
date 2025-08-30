@@ -1,18 +1,19 @@
-import express from 'express';
+import express from "express";
 import dotenv from "dotenv";
-import { connectDB } from './config/db.js';
+import { connectDB } from "./config/db.js";
+
+import ProductRoutes from "./routes/product.route.js";
 
 dotenv.config();
 
 const app = express();
 const port = 3000;
 
-app.get("/", (req, res) => {
-    res.send("Server is ready");
-    
-})
+app.use(express.json());
+
+app.use("/api/products", ProductRoutes);
 
 app.listen(port, () => {
-    connectDB();
-    console.log(`Server started at http://localhost:${port}`);
-})
+  connectDB();
+  console.log(`Server started at http://localhost:${port}`);
+});
